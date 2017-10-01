@@ -1,23 +1,12 @@
 <?php header('Content-Type: application/json');
 
-    set_include_path(get_include_path() . PATH_SEPARATOR . './Alexa/Request/');
-    set_include_path(get_include_path() . PATH_SEPARATOR . './Alexa/Response/');
-
-    include_once('Request.php');
-    include_once('IntentRequest.php');
-    include_once('User.php');
-    include_once('OutputSpeech.php');
-    include_once('Response.php');
-
     function parse_trend($trend) {
 
         if ($trend > 0) {
             return 'trending up';
-        }
-        else if ($trend < 0) {
+        } else if ($trend < 0) {
             return 'trending down';
-        }
-        else {
+        } else {
             return 'holding steady';
         }
     }
@@ -107,48 +96,51 @@
         return 'The windspeed is ' . $wind_speed . ' kilometers per hour blowing from the ' . parse_cardinal_direction($wind_direction) . '.';
     }
 
-    function prepare_answer($alexaRequest) {
+    function prepare_answer($intent) {
 
-        $answer = 'Your weather station cannot tell you that.';
+        $answer = 'Your weather station cannot help you with that.';
 
-        if ($alexaRequest instanceof \Alexa\Request\IntentRequest) {
+        $response = file_get_contents('https://waynedgrant.com/weather/api/weather.json');
+        $weather_json = json_decode($response, true)['weather'];
 
-            $intent = $alexaRequest->intentName;
-
-            $response = file_get_contents('https://waynedgrant.com/weather/api/weather.json');
-            $weather_json = json_decode($response, true)['weather'];
-
-            switch ($intent) {
-                case 'WeatherIntent':
-                    $answer = weather_answer($weather_json); break;
-                case 'HumidityIntent':
-                    $answer = humidity_answer($weather_json); break;
-                case 'PressureIntent':
-                    $answer = pressure_answer($weather_json); break;
-                case 'RainfallIntent':
-                    $answer = rainfall_answer($weather_json); break;
-                case 'TemperatureIntent':
-                    $answer = temperature_answer($weather_json); break;
-                case 'UvIntent':
-                    $answer = uv_answer($weather_json); break;
-                case 'WindIntent':
-                    $answer = wind_answer($weather_json); break;
-            }
+        switch ($intent) {
+            case 'WeatherIntent':
+                $answer = weather_answer($weather_json); break;
+            case 'HumidityIntent':
+                $answer = humidity_answer($weather_json); break;
+            case 'PressureIntent':
+                $answer = pressure_answer($weather_json); break;
+            case 'RainfallIntent':
+                $answer = rainfall_answer($weather_json); break;
+            case 'TemperatureIntent':
+                $answer = temperature_answer($weather_json); break;
+            case 'UvIntent':
+                $answer = uv_answer($weather_json); break;
+            case 'WindIntent':
+                $answer = wind_answer($weather_json); break;
         }
 
         return '<speak>' . $answer . '</speak>';
     }
 
-    $echo_array = json_decode(file_get_contents('php://input'), true);
+	function render_response($answer) {
+		return [
+			'version' => '1.0',
+			'response' => [
+				'outputSpeech' => [
+        			'type' => 'SSML',
+        			'ssml' => $answer
+				],
+				'shouldEndSession' => true
+			]
+		];
+	}
 
-    $alexaRequest = \Alexa\Request\Request::fromData($echo_array);
+    $alexa_request = json_decode(file_get_contents('php://input'), true);
+    $intent = $alexa_request['request']['intent']['name'];
 
-    $answer = prepare_answer($alexaRequest);
-
-    $response = new Alexa\Response\Response;
-    $response->respond($answer)->endSession();
-
-    echo json_encode($response->render());
+    $answer = prepare_answer($intent);
+    echo json_encode(render_response($answer));
 
     exit;
 ?>
