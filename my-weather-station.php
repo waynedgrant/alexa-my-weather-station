@@ -41,6 +41,13 @@
         return round($value, 0, PHP_ROUND_HALF_DOWN);
     }
 
+    function add_plural($value) {
+        if ($value != 1) {
+            return 's';
+        }
+        return '';
+    }
+
     function weather_answer($weather_json) {
         return
             temperature_answer($weather_json) . ' ' .
@@ -67,23 +74,23 @@
         $pressure_json = $weather_json['pressure'];
         $pressure = round_value($pressure_json['current']['mb']);
         $pressure_trend = parse_trend($pressure_json['trend']);
-        return 'The pressure is ' . $pressure . ' millibars and is ' . $pressure_trend . '.';
+        return 'The pressure is ' . $pressure . ' millibar' . add_plural($pressure) . ' and is ' . $pressure_trend . '.';
     }
 
     function rainfall_answer($weather_json) {
         $rainfall_json = $weather_json['rainfall'];
         $rainfall_today = round_value($rainfall_json['daily']['mm']);
-        $rainfall_rate_per_min = round_value($rainfall_json['rate_per_min']['mm']);
-        return 'Today\'s rain fall so far is ' . $rainfall_today . ' millimeters.' .
+        $rainfall_rate_per_min = $rainfall_json['rate_per_min']['mm'];
+        return 'Today\'s rain fall so far is ' . $rainfall_today . ' millimeter' . add_plural($rainfall_today) . '.' .
                '<break time="1s"/>' .
-               'The current rain fall rate is ' . $rainfall_rate_per_min . ' millimeters per minute.';
+               'The current rain fall rate is ' . $rainfall_rate_per_min . ' millimeter' . add_plural($rainfall_rate_per_min) . ' per minute.';
     }
 
     function temperature_answer($weather_json) {
         $temperature_json = $weather_json['temperature'];
         $temperature = round_value($temperature_json['current']['c']);
         $temperature_trend = parse_trend($temperature_json['trend']);
-        return 'The temperature is ' . $temperature . ' degrees celsius and is ' . $temperature_trend . '.';
+        return 'The temperature is ' . $temperature . ' degree' . add_plural($temperature) . ' celsius and is ' . $temperature_trend . '.';
     }
 
     function uvi_answer($weather_json) {
@@ -95,11 +102,11 @@
 
     function wind_answer($weather_json) {
         $wind_json = $weather_json['wind'];
-        $wind_speed = $wind_json['avg_speed']['kmh'];
+        $wind_speed = round_value($wind_json['avg_speed']['kmh']);
 
         if ($wind_speed > 0) {
             $wind_direction = $wind_json['direction']['cardinal'];
-            return 'The windspeed is ' . round_value($wind_speed) . ' kilometers per hour blowing from the ' . parse_cardinal_direction($wind_direction) . '.';
+            return 'The windspeed is ' . $wind_speed . ' kilometer' . add_plural($wind_speed) . ' per hour blowing from the ' . parse_cardinal_direction($wind_direction) . '.';
         } else {
             return 'There wind is completely calm.';
         }
