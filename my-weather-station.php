@@ -37,6 +37,10 @@
         return $description;
     }
 
+    function round_value($value) {
+        return round($value, 0, PHP_ROUND_HALF_DOWN);
+    }
+
     function weather_answer($weather_json) {
         return
             temperature_answer($weather_json) . ' ' .
@@ -49,7 +53,7 @@
             '<break time="2s"/>' .
             humidity_answer($weather_json) . ' ' .
             '<break time="2s"/>' .
-            uv_answer($weather_json);
+            uvi_answer($weather_json);
     }
 
     function humidity_answer($weather_json) {
@@ -61,15 +65,15 @@
 
     function pressure_answer($weather_json) {
         $pressure_json = $weather_json['pressure'];
-        $pressure = $pressure_json['current']['kpa'];
+        $pressure = round_value($pressure_json['current']['mb']);
         $pressure_trend = parse_trend($pressure_json['trend']);
-        return 'The pressure is ' . $pressure . ' kilopascals and is ' . $pressure_trend . '.';
+        return 'The pressure is ' . $pressure . ' millibars and is ' . $pressure_trend . '.';
     }
 
     function rainfall_answer($weather_json) {
         $rainfall_json = $weather_json['rainfall'];
-        $rainfall_today = $rainfall_json['daily']['mm'];
-        $rainfall_rate_per_min = $rainfall_json['rate_per_min']['mm'];
+        $rainfall_today = round_value($rainfall_json['daily']['mm']);
+        $rainfall_rate_per_min = round_value($rainfall_json['rate_per_min']['mm']);
         return 'Today\'s rain fall so far is ' . $rainfall_today . ' millimeters.' .
                '<break time="1s"/>' .
                'The current rain fall rate is ' . $rainfall_rate_per_min . ' millimeters per minute.';
@@ -77,23 +81,28 @@
 
     function temperature_answer($weather_json) {
         $temperature_json = $weather_json['temperature'];
-        $temperature = $temperature_json['current']['c'];
+        $temperature = round_value($temperature_json['current']['c']);
         $temperature_trend = parse_trend($temperature_json['trend']);
         return 'The temperature is ' . $temperature . ' degrees celsius and is ' . $temperature_trend . '.';
     }
 
-    function uv_answer($weather_json) {
+    function uvi_answer($weather_json) {
         $uv_json = $weather_json['uv'];
-        $uv_index = $uv_json['uvi'];
+        $uv_index = round_value($uv_json['uvi']);
         $uv_index_description = $uv_json['description'];
-        return 'The UV is ' . $uv_index_description . ' with an index value of ' . $uv_index . '.';
+        return 'The UV index is ' . $uv_index_description . ' with a value of ' . $uv_index . '.';
     }
 
     function wind_answer($weather_json) {
         $wind_json = $weather_json['wind'];
         $wind_speed = $wind_json['avg_speed']['kmh'];
-        $wind_direction = $wind_json['direction']['cardinal'];
-        return 'The windspeed is ' . $wind_speed . ' kilometers per hour blowing from the ' . parse_cardinal_direction($wind_direction) . '.';
+
+        if ($wind_speed > 0) {
+            $wind_direction = $wind_json['direction']['cardinal'];
+            return 'The windspeed is ' . round_value($wind_speed) . ' kilometers per hour blowing from the ' . parse_cardinal_direction($wind_direction) . '.';
+        } else {
+            return 'There wind is completely calm.';
+        }
     }
 
     function prepare_answer($intent) {
@@ -114,8 +123,8 @@
                 $answer = rainfall_answer($weather_json); break;
             case 'TemperatureIntent':
                 $answer = temperature_answer($weather_json); break;
-            case 'UvIntent':
-                $answer = uv_answer($weather_json); break;
+            case 'UviIntent':
+                $answer = uvi_answer($weather_json); break;
             case 'WindIntent':
                 $answer = wind_answer($weather_json); break;
         }
