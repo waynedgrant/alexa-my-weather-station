@@ -58,7 +58,6 @@ $alexa_request = json_decode(file_get_contents('php://input'), true);
 $intent = $alexa_request['request']['intent']['name'];
 
 $answer_text = prepare_answer($intent);
-error_log($answer_text);
 echo json_encode(render_response($answer_text));
 
 exit;
