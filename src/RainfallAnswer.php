@@ -16,9 +16,9 @@ class RainfallAnswer extends BaseAnswer {
         $rainfall_today = $this->round_value($rainfall_json['daily']['mm']);
         $rainfall_rate_per_min = $rainfall_json['rate_per_min']['mm'];
         return $this->speak(
-            'Today\'s rain fall so far is ' . $rainfall_today . ' millimeter' . $this->add_plural($rainfall_today) . '.' .
+            'Today\'s rain fall so far is ' . $rainfall_today . ' millimetre' . $this->add_plural($rainfall_today) . '.' .
             '<break time="1s"/>' .
-            'The current rain fall rate is ' . $rainfall_rate_per_min . ' millimeter' . $this->add_plural($rainfall_rate_per_min) . ' per minute.');
+            'The current rain fall rate is ' . $rainfall_rate_per_min . ' millimetre' . $this->add_plural($rainfall_rate_per_min) . ' per minute.');
     }
 }
 
