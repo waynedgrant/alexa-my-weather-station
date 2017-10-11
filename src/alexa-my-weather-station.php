@@ -35,7 +35,7 @@ function prepare_answer($intent) {
         case 'WindIntent':
             $answer = new WindAnswer($weather_json); break;
         default:
-            $answer = new DefaultAnswer($weather_json);
+            $answer = new DefaultAnswer();
     }
 
     return $answer->generate();

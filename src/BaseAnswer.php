@@ -7,7 +7,7 @@ abstract class BaseAnswer {
 
     protected $weather_json;
 
-    protected function __construct($weather_json) {
+    protected function __construct($weather_json = null) {
         $this->weather_json = $weather_json;
     }
 

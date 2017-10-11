@@ -7,8 +7,8 @@ require_once('BaseAnswer.php');
 
 class DefaultAnswer extends BaseAnswer {
 
-    public function __construct($weather_json) {
-        parent::__construct($weather_json);
+    public function __construct() {
+        parent::__construct();
     }
 
     public function generate() {
