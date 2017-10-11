@@ -13,12 +13,20 @@ class UviAnswer extends BaseAnswer {
 
     public function generate() {
         $uv_json = $this->weather_json['weather']['uv'];
-        $uv_index = $this->round_value($uv_json['uvi']);
+
+        $uv_index = $uv_json['uvi'];
         $uv_index_description = $uv_json['description'];
+
+        if (is_null($uv_index) || is_null($uv_index_description)) {
+            return $this->speak('The UV index is not known.');
+        }
+
+        $uv_index = $this->round_value($uv_index);
+
         return $this->speak(
             'The UV Index is ' . $uv_index . '.' .
             '<break time="1s"/>' .
-            'The UV is ' . $uv_index . '.');
+            'The UV is ' . $uv_index_description . '.');
     }
 }
 
