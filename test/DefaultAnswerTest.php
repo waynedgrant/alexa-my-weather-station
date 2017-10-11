@@ -7,8 +7,8 @@ class DefaultAnswerTest extends PHPUnit_Framework_TestCase
 {
     public function test_generate()
     {
-        $testee = new DefaultAnswer("-");
-        $this->assertSame("<speak>Your weather station cannot help you with that.</speak>", $testee->generate());
+        $testee = new DefaultAnswer('-');
+        $this->assertSame('<speak>Your weather station cannot help you with that.</speak>', $testee->generate());
     }
 }
 

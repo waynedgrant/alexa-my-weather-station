@@ -3,7 +3,7 @@
 # Copyright 2017 Wayne D Grant (www.waynedgrant.com)
 # Licensed under the MIT License
 
-require_once("BaseAnswer.php");
+require_once('BaseAnswer.php');
 
 class RainfallAnswer extends BaseAnswer {
 

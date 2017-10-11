@@ -3,13 +3,13 @@
 # Copyright 2017 Wayne D Grant (www.waynedgrant.com)
 # Licensed under the MIT License
 
-require_once("BaseAnswer.php");
-require_once("HumidityAnswer.php");
-require_once("PressureAnswer.php");
-require_once("RainfallAnswer.php");
-require_once("TemperatureAnswer.php");
-require_once("UviAnswer.php");
-require_once("WindAnswer.php");
+require_once('BaseAnswer.php');
+require_once('HumidityAnswer.php');
+require_once('PressureAnswer.php');
+require_once('RainfallAnswer.php');
+require_once('TemperatureAnswer.php');
+require_once('UviAnswer.php');
+require_once('WindAnswer.php');
 
 class WeatherAnswer extends BaseAnswer {
 
