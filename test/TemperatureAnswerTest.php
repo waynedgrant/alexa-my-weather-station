@@ -26,6 +26,13 @@ class TemperatureAnswerTest extends PHPUnit_Framework_TestCase
             $testee->generate());
     }
 
+    public function test_zero_degrees_temperature() {
+        $testee = new TemperatureAnswer($this->create_weather_json('0.0', '0'));
+        $this->assertSame(
+            '<speak>The temperature is 0 degrees celsius.<break time="1s"/>The temperature is holding steady.</speak>',
+            $testee->generate());
+    }
+
     public function test_one_degree_temperature() {
         $testee = new TemperatureAnswer($this->create_weather_json('1.0', '0'));
         $this->assertSame(
@@ -33,7 +40,7 @@ class TemperatureAnswerTest extends PHPUnit_Framework_TestCase
             $testee->generate());
     }
 
-    public function test_minus_one_degree_temperature() {
+    public function test_minus_one_degrees_temperature() {
         $testee = new TemperatureAnswer($this->create_weather_json('-1.0', '0'));
         $this->assertSame(
             '<speak>The temperature is -1 degrees celsius.<break time="1s"/>The temperature is holding steady.</speak>',
