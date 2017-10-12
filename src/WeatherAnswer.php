@@ -24,20 +24,21 @@ class WeatherAnswer extends BaseAnswer {
     }
 
     public function generate() {
-
         $temperature_answer = new TemperatureAnswer($this->weather_json);
+        $humidity_answer = new HumidityAnswer($this->weather_json);
+        $dew_point_answer = new DewPointAnswer($this->weather_json);
         $pressure_answer = new PressureAnswer($this->weather_json);
         $rain_answer = new RainAnswer($this->weather_json);
         $wind_answer = new WindAnswer($this->weather_json);
-        $humidity_answer = new HumidityAnswer($this->weather_json);
         $uvi_answer = new UvAnswer($this->weather_json);
 
         return $this->speak(
             $this->remove_speak($temperature_answer->generate()) . '<break time="2s"/>' .
+            $this->remove_speak($humidity_answer->generate()) . '<break time="2s"/>' .
+            $this->remove_speak($dew_point_answer->generate()) . '<break time="2s"/>' .
             $this->remove_speak($pressure_answer->generate()) . '<break time="2s"/>' .
             $this->remove_speak($rain_answer->generate()) . '<break time="2s"/>' .
             $this->remove_speak($wind_answer->generate()) . '<break time="2s"/>' .
-            $this->remove_speak($humidity_answer->generate()) . '<break time="2s"/>' .
             $this->remove_speak($uvi_answer->generate()));
     }
 }
