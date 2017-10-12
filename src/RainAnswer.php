@@ -17,7 +17,7 @@ class RainAnswer extends BaseAnswer {
         $rainfall_today = $rainfall_json['daily']['mm'];
 
         if (is_null($rainfall_today)) {
-            return $this->speak('The rainfall conditions are not known.');
+            return $this->speak('The rain fall conditions are not known.');
         }
 
         $rainfall_today = $this->round_value($rainfall_today);

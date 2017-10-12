@@ -5,6 +5,7 @@
 
 require_once('config.php');
 require_once('WeatherAnswer.php');
+require_once('DewPointAnswer.php');
 require_once('HumidityAnswer.php');
 require_once('PressureAnswer.php');
 require_once('RainAnswer.php');
@@ -16,11 +17,14 @@ require_once('DefaultAnswer.php');
 function prepare_answer($intent) {
 
     $weather_response = file_get_contents(JSON_WEBSERVICE_WDLIVE_LOCATION);
+
     $weather_json = json_decode($weather_response, true);
 
     switch ($intent) {
         case 'WeatherIntent':
             $answer = new WeatherAnswer($weather_json); break;
+        case 'DewPointIntent':
+            $answer = new DewPointAnswer($weather_json); break;
         case 'HumidityIntent':
             $answer = new HumidityAnswer($weather_json); break;
         case 'PressureIntent':
