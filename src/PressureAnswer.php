@@ -15,7 +15,7 @@ class PressureAnswer extends BaseAnswer {
         $pressure_json = $this->weather_json['weather']['pressure'];
 
         $pressure = $pressure_json['current']['mb'];
-        $pressure_trend = $pressure_json['trend'];
+        $pressure_trend = $pressure_json['trend_per_hr']['mb'];
 
         if (is_null($pressure) || is_null($pressure_trend)) {
             return $this->speak('The pressure is not known.');

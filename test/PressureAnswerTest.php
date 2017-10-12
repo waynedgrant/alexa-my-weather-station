@@ -6,21 +6,21 @@
 class PressureAnswerTest extends PHPUnit_Framework_TestCase
 {
     public function test_no_rounding_pressure_and_holding_steady() {
-        $testee = new PressureAnswer($this->create_weather_json('1005.0', '0'));
+        $testee = new PressureAnswer($this->create_weather_json('1005.0', '0.0'));
         $this->assertSame(
             '<speak>The pressure is 1005 millibars.<break time="1s"/>The pressure is holding steady.</speak>',
             $testee->generate());
     }
 
     public function test_round_pressure_up_and_trending_up() {
-        $testee = new PressureAnswer($this->create_weather_json('1005.6', '1'));
+        $testee = new PressureAnswer($this->create_weather_json('1005.6', '1.0'));
         $this->assertSame(
             '<speak>The pressure is 1006 millibars.<break time="1s"/>The pressure is trending up.</speak>',
             $testee->generate());
     }
 
     public function test_round_pressure_down_and_trending_down() {
-        $testee = new PressureAnswer($this->create_weather_json('1005.5', '-1'));
+        $testee = new PressureAnswer($this->create_weather_json('1005.5', '-1.0'));
         $this->assertSame(
             '<speak>The pressure is 1005 millibars.<break time="1s"/>The pressure is trending down.</speak>',
             $testee->generate());
@@ -46,7 +46,7 @@ class PressureAnswerTest extends PHPUnit_Framework_TestCase
                 array('pressure' =>
                     array(
                         'current' => array('mb' => $pressure_mb),
-                        'trend' => $trend)));
+                        'trend_per_hr' => array('mb' => $trend))));
     }
 }
 ?>

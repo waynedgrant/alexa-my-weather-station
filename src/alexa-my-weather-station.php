@@ -3,6 +3,7 @@
 # Copyright 2017 Wayne D Grant (www.waynedgrant.com)
 # Licensed under the MIT License
 
+require_once('config.php');
 require_once('WeatherAnswer.php');
 require_once('HumidityAnswer.php');
 require_once('PressureAnswer.php');
@@ -14,9 +15,7 @@ require_once('DefaultAnswer.php');
 
 function prepare_answer($intent) {
 
-    $wdlive_url = 'https://waynedgrant.com/weather/api/weather.json';
-
-    $weather_response = file_get_contents($wdlive_url);
+    $weather_response = file_get_contents(JSON_WEBSERVICE_WDLIVE_LOCATION);
     $weather_json = json_decode($weather_response, true);
 
     switch ($intent) {
