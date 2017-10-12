@@ -25,9 +25,7 @@ class PressureAnswer extends BaseAnswer {
         $pressure_trend = $this->parse_trend($pressure_trend);
 
         return $this->speak(
-            'The pressure is ' . $pressure . ' millibars.' .
-            '<break time="1s"/>' .
-            'The pressure is ' . $pressure_trend . '.');
+            'The pressure is ' . $pressure . ' millibars and is ' . $pressure_trend . '.');
     }
 }
 

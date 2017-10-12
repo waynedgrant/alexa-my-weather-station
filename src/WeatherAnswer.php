@@ -6,7 +6,7 @@
 require_once('BaseAnswer.php');
 require_once('HumidityAnswer.php');
 require_once('PressureAnswer.php');
-require_once('RainfallAnswer.php');
+require_once('RainAnswer.php');
 require_once('TemperatureAnswer.php');
 require_once('UvAnswer.php');
 require_once('WindAnswer.php');
@@ -27,7 +27,7 @@ class WeatherAnswer extends BaseAnswer {
 
         $temperature_answer = new TemperatureAnswer($this->weather_json);
         $pressure_answer = new PressureAnswer($this->weather_json);
-        $rainfall_answer = new RainfallAnswer($this->weather_json);
+        $rain_answer = new RainAnswer($this->weather_json);
         $wind_answer = new WindAnswer($this->weather_json);
         $humidity_answer = new HumidityAnswer($this->weather_json);
         $uvi_answer = new UvAnswer($this->weather_json);
@@ -35,7 +35,7 @@ class WeatherAnswer extends BaseAnswer {
         return $this->speak(
             $this->remove_speak($temperature_answer->generate()) . '<break time="2s"/>' .
             $this->remove_speak($pressure_answer->generate()) . '<break time="2s"/>' .
-            $this->remove_speak($rainfall_answer->generate()) . '<break time="2s"/>' .
+            $this->remove_speak($rain_answer->generate()) . '<break time="2s"/>' .
             $this->remove_speak($wind_answer->generate()) . '<break time="2s"/>' .
             $this->remove_speak($humidity_answer->generate()) . '<break time="2s"/>' .
             $this->remove_speak($uvi_answer->generate()));

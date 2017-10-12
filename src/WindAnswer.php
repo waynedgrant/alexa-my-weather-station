@@ -49,11 +49,9 @@ class WindAnswer extends BaseAnswer {
         $wind_speed = $this->round_value($wind_speed);
 
         if ($wind_speed > 0) {
-
             return $this->speak(
-                'The wind speed is ' . $wind_speed . ' kilometer' . $this->add_plural($wind_speed) . ' per hour.' .
-                '<break time="1s"/>' .
-                'The wind is blowing from the ' . $this->parse_cardinal_direction($wind_direction) . '.');
+                'The wind speed is ' . $wind_speed . ' kilometer' . $this->add_plural($wind_speed) .
+                ' per hour and is blowing from the ' . $this->parse_cardinal_direction($wind_direction) . '.');
         } else {
             return $this->speak('The wind is completely calm.');
         }

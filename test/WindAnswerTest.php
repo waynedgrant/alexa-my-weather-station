@@ -8,21 +8,21 @@ class WindAnswerTest extends PHPUnit_Framework_TestCase
     public function test_no_rounding_wind_speed() {
         $testee = new WindAnswer($this->create_weather_json('5.0', 'N'));
         $this->assertSame(
-            '<speak>The wind speed is 5 kilometers per hour.<break time="1s"/>The wind is blowing from the North.</speak>',
+            '<speak>The wind speed is 5 kilometers per hour and is blowing from the North.</speak>',
             $testee->generate());
     }
 
     public function test_round_wind_speed_up() {
         $testee = new WindAnswer($this->create_weather_json('5.6', 'N'));
         $this->assertSame(
-            '<speak>The wind speed is 6 kilometers per hour.<break time="1s"/>The wind is blowing from the North.</speak>',
+            '<speak>The wind speed is 6 kilometers per hour and is blowing from the North.</speak>',
             $testee->generate());
     }
 
     public function test_round_wind_speed_down() {
         $testee = new WindAnswer($this->create_weather_json('5.5', 'N'));
         $this->assertSame(
-            '<speak>The wind speed is 5 kilometers per hour.<break time="1s"/>The wind is blowing from the North.</speak>',
+            '<speak>The wind speed is 5 kilometers per hour and is blowing from the North.</speak>',
             $testee->generate());
     }
 
@@ -36,7 +36,7 @@ class WindAnswerTest extends PHPUnit_Framework_TestCase
     public function test_one_kmh_wind_speed() {
         $testee = new WindAnswer($this->create_weather_json('1.0', 'N'));
         $this->assertSame(
-            '<speak>The wind speed is 1 kilometer per hour.<break time="1s"/>The wind is blowing from the North.</speak>',
+            '<speak>The wind speed is 1 kilometer per hour and is blowing from the North.</speak>',
             $testee->generate());
     }
 
@@ -62,7 +62,7 @@ class WindAnswerTest extends PHPUnit_Framework_TestCase
     private function direction_test($wind_direction_cardinal, $wind_direction_description) {
         $testee = new WindAnswer($this->create_weather_json('1.0', $wind_direction_cardinal));
         $this->assertSame(
-            '<speak>The wind speed is 1 kilometer per hour.<break time="1s"/>The wind is blowing from the ' . $wind_direction_description . '.</speak>',
+            '<speak>The wind speed is 1 kilometer per hour and is blowing from the ' . $wind_direction_description . '.</speak>',
             $testee->generate());
     }
 

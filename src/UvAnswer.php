@@ -24,9 +24,7 @@ class UvAnswer extends BaseAnswer {
         $uv_index = $this->round_value($uv_index);
 
         return $this->speak(
-            'The UV index is ' . $uv_index . '.' .
-            '<break time="1s"/>' .
-            'The UV is ' . $uv_index_description . '.');
+            'The UV index is ' . $uv_index . ' which is ' . $uv_index_description . '.');
     }
 }
 

@@ -24,9 +24,7 @@ class HumidityAnswer extends BaseAnswer {
         $humidity_trend = $this->parse_trend($humidity_trend);
 
         return $this->speak(
-            'The humidity is ' . $humidity . ' percent.' .
-            '<break time="1s"/>' .
-            'The humidity is ' . $humidity_trend . '.');
+            'The humidity is ' . $humidity . ' percent and is ' . $humidity_trend . '.');
     }
 }
 

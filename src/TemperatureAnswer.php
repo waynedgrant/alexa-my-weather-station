@@ -25,9 +25,7 @@ class TemperatureAnswer extends BaseAnswer {
         $temperature_trend = $this->parse_trend($temperature_trend);
 
         return $this->speak(
-            'The temperature is ' . $temperature . ' degree' . $this->add_plural($temperature) . ' celsius.' .
-            '<break time="1s"/>' .
-            'The temperature is ' . $temperature_trend . '.');
+            'The temperature is ' . $temperature . ' degree' . $this->add_plural($temperature) . ' celsius and is ' . $temperature_trend . '.');
     }
 }
 

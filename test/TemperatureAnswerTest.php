@@ -8,42 +8,42 @@ class TemperatureAnswerTest extends PHPUnit_Framework_TestCase
     public function test_no_rounding_temperature_and_holding_steady() {
         $testee = new TemperatureAnswer($this->create_weather_json('5.0', '0'));
         $this->assertSame(
-            '<speak>The temperature is 5 degrees celsius.<break time="1s"/>The temperature is holding steady.</speak>',
+            '<speak>The temperature is 5 degrees celsius and is holding steady.</speak>',
             $testee->generate());
     }
 
     public function test_round_temperature_up_and_trending_up() {
         $testee = new TemperatureAnswer($this->create_weather_json('5.6', '1'));
         $this->assertSame(
-            '<speak>The temperature is 6 degrees celsius.<break time="1s"/>The temperature is trending up.</speak>',
+            '<speak>The temperature is 6 degrees celsius and is trending up.</speak>',
             $testee->generate());
     }
 
     public function test_round_temperature_down_and_trending_down() {
         $testee = new TemperatureAnswer($this->create_weather_json('-5.5', '-1'));
         $this->assertSame(
-            '<speak>The temperature is -5 degrees celsius.<break time="1s"/>The temperature is trending down.</speak>',
+            '<speak>The temperature is -5 degrees celsius and is trending down.</speak>',
             $testee->generate());
     }
 
     public function test_zero_degrees_temperature() {
         $testee = new TemperatureAnswer($this->create_weather_json('0.0', '0'));
         $this->assertSame(
-            '<speak>The temperature is 0 degrees celsius.<break time="1s"/>The temperature is holding steady.</speak>',
+            '<speak>The temperature is 0 degrees celsius and is holding steady.</speak>',
             $testee->generate());
     }
 
     public function test_one_degree_temperature() {
         $testee = new TemperatureAnswer($this->create_weather_json('1.0', '0'));
         $this->assertSame(
-            '<speak>The temperature is 1 degree celsius.<break time="1s"/>The temperature is holding steady.</speak>',
+            '<speak>The temperature is 1 degree celsius and is holding steady.</speak>',
             $testee->generate());
     }
 
     public function test_minus_one_degrees_temperature() {
         $testee = new TemperatureAnswer($this->create_weather_json('-1.0', '0'));
         $this->assertSame(
-            '<speak>The temperature is -1 degrees celsius.<break time="1s"/>The temperature is holding steady.</speak>',
+            '<speak>The temperature is -1 degrees celsius and is holding steady.</speak>',
             $testee->generate());
     }
 
