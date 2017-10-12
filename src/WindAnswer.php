@@ -38,16 +38,24 @@ class WindAnswer extends BaseAnswer {
 
     public function generate() {
         $wind_json = $this->weather_json['weather']['wind'];
-        $wind_speed = $this->round_value($wind_json['avg_speed']['kmh']);
+
+        $wind_speed = $wind_json['avg_speed']['kmh'];
+        $wind_direction = $wind_json['direction']['cardinal'];
+
+        if (is_null($wind_speed) || is_null($wind_direction)) {
+            return $this->speak('The wind conditions are not known.');
+        }
+
+        $wind_speed = $this->round_value($wind_speed);
 
         if ($wind_speed > 0) {
-            $wind_direction = $wind_json['direction']['cardinal'];
+
             return $this->speak(
                 'The wind speed is ' . $wind_speed . ' kilometer' . $this->add_plural($wind_speed) . ' per hour.' .
                 '<break time="1s"/>' .
                 'The wind is blowing from the ' . $this->parse_cardinal_direction($wind_direction) . '.');
         } else {
-            return $this->speak('There wind is completely calm.');
+            return $this->speak('The wind is completely calm.');
         }
     }
 }
