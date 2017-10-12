@@ -9,7 +9,7 @@ require_once('HumidityAnswer.php');
 require_once('PressureAnswer.php');
 require_once('RainfallAnswer.php');
 require_once('TemperatureAnswer.php');
-require_once('UviAnswer.php');
+require_once('UvAnswer.php');
 require_once('WindAnswer.php');
 require_once('DefaultAnswer.php');
 
@@ -29,8 +29,8 @@ function prepare_answer($intent) {
             $answer = new RainfallAnswer($weather_json); break;
         case 'TemperatureIntent':
             $answer = new TemperatureAnswer($weather_json); break;
-        case 'UviIntent':
-            $answer = new UviAnswer($weather_json); break;
+        case 'UvIntent':
+            $answer = new UvAnswer($weather_json); break;
         case 'WindIntent':
             $answer = new WindAnswer($weather_json); break;
         default:

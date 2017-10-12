@@ -5,7 +5,7 @@
 
 require_once('BaseAnswer.php');
 
-class UviAnswer extends BaseAnswer {
+class UvAnswer extends BaseAnswer {
 
     public function __construct($weather_json) {
         parent::__construct($weather_json);
@@ -24,7 +24,7 @@ class UviAnswer extends BaseAnswer {
         $uv_index = $this->round_value($uv_index);
 
         return $this->speak(
-            'The UV Index is ' . $uv_index . '.' .
+            'The UV index is ' . $uv_index . '.' .
             '<break time="1s"/>' .
             'The UV is ' . $uv_index_description . '.');
     }

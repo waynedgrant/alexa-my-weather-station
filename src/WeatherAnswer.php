@@ -8,7 +8,7 @@ require_once('HumidityAnswer.php');
 require_once('PressureAnswer.php');
 require_once('RainfallAnswer.php');
 require_once('TemperatureAnswer.php');
-require_once('UviAnswer.php');
+require_once('UvAnswer.php');
 require_once('WindAnswer.php');
 
 class WeatherAnswer extends BaseAnswer {
@@ -30,7 +30,7 @@ class WeatherAnswer extends BaseAnswer {
         $rainfall_answer = new RainfallAnswer($this->weather_json);
         $wind_answer = new WindAnswer($this->weather_json);
         $humidity_answer = new HumidityAnswer($this->weather_json);
-        $uvi_answer = new UviAnswer($this->weather_json);
+        $uvi_answer = new UvAnswer($this->weather_json);
 
         return $this->speak(
             $this->remove_speak($temperature_answer->generate()) . '<break time="2s"/>' .
