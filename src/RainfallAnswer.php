@@ -13,8 +13,10 @@ class RainfallAnswer extends BaseAnswer {
 
     public function generate() {
         $rainfall_json = $this->weather_json['weather']['rainfall'];
+
         $rainfall_today = $this->round_value($rainfall_json['daily']['mm']);
         $rainfall_rate_per_min = $rainfall_json['rate_per_min']['mm'];
+
         return $this->speak(
             'Today\'s rain fall so far is ' . $rainfall_today . ' millimetre' . $this->add_plural($rainfall_today) . '.' .
             '<break time="1s"/>' .

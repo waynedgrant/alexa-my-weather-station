@@ -13,10 +13,19 @@ class PressureAnswer extends BaseAnswer {
 
     public function generate() {
         $pressure_json = $this->weather_json['weather']['pressure'];
-        $pressure = $this->round_value($pressure_json['current']['mb']);
-        $pressure_trend = $this->parse_trend($pressure_json['trend']);
+
+        $pressure = $pressure_json['current']['mb'];
+        $pressure_trend = $pressure_json['trend'];
+
+        if (is_null($pressure) || is_null($pressure_trend)) {
+            return $this->speak('The pressure is not known.');
+        }
+
+        $pressure = $this->round_value($pressure);
+        $pressure_trend = $this->parse_trend($pressure_trend);
+
         return $this->speak(
-            'The pressure is ' . $pressure . ' millibar' . $this->add_plural($pressure) . '.' .
+            'The pressure is ' . $pressure . ' millibars.' .
             '<break time="1s"/>' .
             'The pressure is ' . $pressure_trend . '.');
     }
