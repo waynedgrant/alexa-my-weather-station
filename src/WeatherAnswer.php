@@ -33,12 +33,12 @@ class WeatherAnswer extends BaseAnswer {
         $uvi_answer = new UvAnswer($this->weather_json);
 
         return $this->speak(
-            $this->remove_speak($temperature_answer->generate()) . '<break time="2s"/>' .
-            $this->remove_speak($humidity_answer->generate()) . '<break time="2s"/>' .
-            $this->remove_speak($dew_point_answer->generate()) . '<break time="2s"/>' .
-            $this->remove_speak($pressure_answer->generate()) . '<break time="2s"/>' .
-            $this->remove_speak($rain_answer->generate()) . '<break time="2s"/>' .
-            $this->remove_speak($wind_answer->generate()) . '<break time="2s"/>' .
+            $this->remove_speak($temperature_answer->generate()) . '<break time="1s"/>' .
+            $this->remove_speak($humidity_answer->generate()) . '<break time="1s"/>' .
+            $this->remove_speak($dew_point_answer->generate()) . '<break time="1s"/>' .
+            $this->remove_speak($pressure_answer->generate()) . '<break time="1s"/>' .
+            $this->remove_speak($rain_answer->generate()) . '<break time="1s"/>' .
+            $this->remove_speak($wind_answer->generate()) . '<break time="1s"/>' .
             $this->remove_speak($uvi_answer->generate()));
     }
 }

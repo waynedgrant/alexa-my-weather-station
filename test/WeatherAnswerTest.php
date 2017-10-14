@@ -8,12 +8,12 @@ class WeatherAnswerTest extends PHPUnit_Framework_TestCase
     public function test_weather() {
         $testee = new WeatherAnswer($this->create_weather_json());
         $this->assertSame(
-            '<speak>The temperature is not known.<break time="2s"/>' .
-            'The humidity is not known.<break time="2s"/>' .
-            'The dew point is not known.<break time="2s"/>' .
-            'The pressure is not known.<break time="2s"/>' .
-            'The rain fall conditions are not known.<break time="2s"/>' .
-            'The wind conditions are not known.<break time="2s"/>' .
+            '<speak>The temperature is not known.<break time="1s"/>' .
+            'The humidity is not known.<break time="1s"/>' .
+            'The dew point is not known.<break time="1s"/>' .
+            'The pressure is not known.<break time="1s"/>' .
+            'The rain fall conditions are not known.<break time="1s"/>' .
+            'The wind conditions are not known.<break time="1s"/>' .
             'The UV index is not known.</speak>',
             $testee->generate());
     }
