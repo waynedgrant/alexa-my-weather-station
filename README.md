@@ -75,7 +75,7 @@ HumidityIntent about the humidity
 PressureIntent about the pressure
 RainIntent about the rain
 TemperatureIntent about the temperature
-UvIntent about the UV
+UvIntent about the U.V. index
 WindIntent about the wind
 ```
 
