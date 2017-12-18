@@ -3,7 +3,7 @@
 # Copyright 2017 Wayne D Grant (www.waynedgrant.com)
 # Licensed under the MIT License
 
-class UvAnswerTest extends PHPUnit_Framework_TestCase
+class UvAnswerTest extends PHPUnit\Framework\TestCase
 {
     public function test_no_rounding_uvi() {
         $testee = new UvAnswer($this->create_weather_json('2.0', 'low'));

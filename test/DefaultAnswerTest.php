@@ -3,7 +3,7 @@
 # Copyright 2017 Wayne D Grant (www.waynedgrant.com)
 # Licensed under the MIT License
 
-class DefaultAnswerTest extends PHPUnit_Framework_TestCase
+class DefaultAnswerTest extends PHPUnit\Framework\TestCase
 {
     public function test_generate()
     {

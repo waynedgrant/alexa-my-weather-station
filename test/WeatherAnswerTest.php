@@ -3,7 +3,7 @@
 # Copyright 2017 Wayne D Grant (www.waynedgrant.com)
 # Licensed under the MIT License
 
-class WeatherAnswerTest extends PHPUnit_Framework_TestCase
+class WeatherAnswerTest extends PHPUnit\Framework\TestCase
 {
     public function test_weather() {
         $testee = new WeatherAnswer($this->create_weather_json());

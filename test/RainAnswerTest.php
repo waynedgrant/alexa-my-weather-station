@@ -3,7 +3,7 @@
 # Copyright 2017 Wayne D Grant (www.waynedgrant.com)
 # Licensed under the MIT License
 
-class RainAnswerTest extends PHPUnit_Framework_TestCase
+class RainAnswerTest extends PHPUnit\Framework\TestCase
 {
     public function test_no_rounding_daily_rainfall() {
         $testee = new RainAnswer($this->create_weather_json('5.00'));

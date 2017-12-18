@@ -3,7 +3,7 @@
 # Copyright 2017 Wayne D Grant (www.waynedgrant.com)
 # Licensed under the MIT License
 
-class PressureAnswerTest extends PHPUnit_Framework_TestCase
+class PressureAnswerTest extends PHPUnit\Framework\TestCase
 {
     public function test_no_rounding_pressure_and_holding_steady() {
         $testee = new PressureAnswer($this->create_weather_json('1005.0', '0.0'));

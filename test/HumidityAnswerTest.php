@@ -3,7 +3,7 @@
 # Copyright 2017 Wayne D Grant (www.waynedgrant.com)
 # Licensed under the MIT License
 
-class HumidityAnswerTest extends PHPUnit_Framework_TestCase
+class HumidityAnswerTest extends PHPUnit\Framework\TestCase
 {
     public function test_holding_steady() {
         $testee = new HumidityAnswer($this->create_weather_json('55', '0'));

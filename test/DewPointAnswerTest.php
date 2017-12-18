@@ -3,7 +3,7 @@
 # Copyright 2017 Wayne D Grant (www.waynedgrant.com)
 # Licensed under the MIT License
 
-class DewPointAnswerTest extends PHPUnit_Framework_TestCase
+class DewPointAnswerTest extends PHPUnit\Framework\TestCase
 {
     public function test_no_rounding_dew_point() {
         $testee = new DewPointAnswer($this->create_weather_json('5.0'));
