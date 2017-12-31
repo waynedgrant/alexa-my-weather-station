@@ -10,7 +10,7 @@ data that has been exposed via [json-webservice-wdlive](https://github.com/wayne
 
 ## Requirements
 
-1. PHP version 5 or above installed on a web server
+1. PHP version 5 or above installed on the web server
 2. SSL support on the web server
 3. Callable instance of [json-webservice-wdlive](https://github.com/waynedgrant/json-webservice-wdlive)
 
